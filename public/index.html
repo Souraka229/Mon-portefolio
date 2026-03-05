@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Souraka HAMIDA — Data Scientist & Tech Entrepreneur from Benin, West Africa. Transforming raw data into decisions and decisions into evolving systems." />
+  <meta name="description" content="Souraka HAMIDA — Étudiant en Data Science & Entrepreneur Tech au Bénin. Le meilleur moment pour l'Afrique, c'était il y a dix ans. Le deuxième, c'est aujourd'hui." />
   <meta name="author" content="Souraka HAMIDA" />
-  <meta property="og:title" content="Souraka HAMIDA — Data Scientist & Tech Entrepreneur" />
-  <meta property="og:description" content="Transforming raw data into decisions and decisions into evolving systems. Based in Cotonou, Benin." />
+  <meta property="og:title" content="Souraka HAMIDA — Data Science & Entrepreneuriat" />
+  <meta property="og:description" content="Étudiant en Data Science, fondateur de Restafy & AfroSite. Cotonou, Bénin." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0d0c09" />
   <title>Souraka HAMIDA — Data Science & Digitalisation</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 4c-1.5 0-3 .8-4.2 1.6C26.5 6.8 25 8.5 24 10c-1.2 1.8-2.5 4-3.5 6.2-1 2-1.8 4.5-2.8 6.5-.8 1.6-2 3-3 4.5-1.2 1.8-2.2 3.8-2.8 6-.5 1.8-.6 3.8-.4 5.8.2 2 .8 3.8 1.5 5.5 1 2.2 2.5 4 4 5.8 1.8 2 3.8 3.5 6 4.8 2.2 1.2 4.5 2 7 2.5 2 .4 4.2.4 6.2 0 2-.5 3.8-1.2 5.5-2.2 2-1.2 3.8-2.8 5.2-4.5 1.5-1.8 2.5-4 3.2-6.2.5-1.8.8-3.5.8-5.5 0-2-.2-4-.8-5.8-.8-2.5-2-4.8-3.2-7-1.2-2.2-2.5-4.2-4-6.2-1.5-2-3-3.8-4.5-5.5C36.8 9.5 35 7.5 33.5 6 32.8 5 32.5 4 32 4z' fill='%23c9a96e'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -897,7 +898,46 @@
     .vision-dot.active { background: var(--accent); }
 
     /* =============================
-       8. CONTACT
+       8. RÉSEAU
+    ============================= */
+    #reseau { padding: 100px 0; border-top: 1px solid var(--border); }
+    .reseau-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .reseau-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 36px 32px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--fg);
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+    .reseau-card:hover {
+      border-color: var(--accent);
+      background: rgba(201,169,110,0.04);
+    }
+    .reseau-icon { color: var(--accent); }
+    .reseau-name {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+    .reseau-handle {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+    @media (max-width: 600px) {
+      .reseau-grid { grid-template-columns: 1fr; }
+    }
+
+    /* =============================
+       9. CONTACT
     ============================= */
     #contact { padding: 120px 0; border-top: 1px solid var(--border); }
     .contact-grid {
@@ -1041,10 +1081,11 @@
 <nav id="mobile-nav" role="navigation" aria-label="Mobile navigation">
   <a href="#about" data-fr="À Propos" data-en="About">À Propos</a>
   <a href="#skills" data-fr="Compétences" data-en="Skills">Compétences</a>
-  <a href="#research" data-fr="Recherche" data-en="Research">Recherche</a>
+  <a href="#research" data-fr="Méthode" data-en="Approach">Méthode</a>
   <a href="#projects" data-fr="Projets" data-en="Projects">Projets</a>
+  <a href="#reseau" data-fr="Réseau" data-en="Network">Réseau</a>
   <a href="#contact" data-fr="Contact" data-en="Contact">Contact</a>
-</nav>
+  </nav>
 
 <!-- NAVBAR -->
 <header id="navbar" role="banner">
@@ -1053,8 +1094,9 @@
     <ul class="nav-links">
       <li><a href="#about" data-fr="À Propos" data-en="About">À Propos</a></li>
       <li><a href="#skills" data-fr="Compétences" data-en="Skills">Compétences</a></li>
-      <li><a href="#research" data-fr="Recherche" data-en="Research">Recherche</a></li>
+      <li><a href="#research" data-fr="Méthode" data-en="Approach">Méthode</a></li>
       <li><a href="#projects" data-fr="Projets" data-en="Projects">Projets</a></li>
+      <li><a href="#reseau" data-fr="Réseau" data-en="Network">Réseau</a></li>
       <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
       <li><button id="lang-btn" aria-label="Switch language">EN</button></li>
     </ul>
@@ -1070,14 +1112,14 @@
 <section id="hero" class="container">
   <div class="hero-left reveal">
     <div class="hero-kicker">
-      <span data-fr="Data Scientist · Bénin, Afrique de l'Ouest" data-en="Data Scientist · Benin, West Africa">Data Scientist · Bénin, Afrique de l'Ouest</span>
+      <span data-fr="Étudiant en Data Science · Bénin, Afrique de l'Ouest" data-en="Data Science Student · Benin, West Africa">Étudiant en Data Science · Bénin, Afrique de l'Ouest</span>
     </div>
     <h1 class="hero-title">
       <span class="first">Souraka</span>
       <span class="last">HAMIDA</span>
     </h1>
-    <p class="hero-slogan" data-fr="Je transforme les données brutes en décisions — et les décisions en systèmes qui évoluent." data-en="I transform raw data into decisions — and decisions into systems that evolve.">
-      Je transforme les données brutes en décisions — et les décisions en systèmes qui évoluent.
+    <p class="hero-slogan" data-fr="Le meilleur moment pour l'Afrique, c'était il y a dix ans. Le deuxième, c'est aujourd'hui." data-en="The best time for Africa was ten years ago. The second best time is now.">
+      Le meilleur moment pour l'Afrique, c'était il y a dix ans. Le deuxième, c'est aujourd'hui.
     </p>
     <div class="hero-tags">
       <span class="hero-tag">Data Science</span>
@@ -1096,7 +1138,7 @@
       <div class="gold-corner tr"></div>
       <div class="gold-corner bl"></div>
       <div class="gold-corner br"></div>
-      <img src="profile.jpg" alt="Portrait de Souraka HAMIDA, Data Scientist" onerror="this.style.background='#1a1916';this.style.aspectRatio='3/4';this.removeAttribute('src')" />
+      <img src="profile.jpg" alt="Portrait de Souraka HAMIDA, Étudiant en Data Science" onerror="this.style.background='#1a1916';this.style.aspectRatio='3/4';this.removeAttribute('src')" />
       <div class="hero-img-label" data-fr="Cotonou, Bénin · 2025" data-en="Cotonou, Benin · 2025">Cotonou, Bénin · 2025</div>
     </div>
   </div>
@@ -1146,13 +1188,13 @@
       </div>
       <div class="reveal" style="transition-delay:0.15s">
         <p class="about-body">
-          <span data-fr="Étudiante en Digitalisation & Data à Sèmè City Institute of Technology and Innovation, je travaille à concevoir des outils digitaux utiles aux entreprises africaines. Je pilote deux ventures : Restafy, une solution FoodTech pour la restauration au Bénin, et AfroSite, une agence web dédiée aux entrepreneurs africains." data-en="Student in Digitalisation & Data at Sèmè City Institute of Technology and Innovation, I work on designing digital tools that are genuinely useful for African businesses. I lead two ventures: Restafy, a FoodTech solution for restaurants in Benin, and AfroSite, a web agency dedicated to African entrepreneurs.">
-            Étudiante en Digitalisation &amp; Data à Sèmè City Institute of Technology and Innovation, je travaille à concevoir des outils digitaux utiles aux entreprises africaines. Je pilote deux ventures : Restafy, une solution FoodTech pour la restauration au Bénin, et AfroSite, une agence web dédiée aux entrepreneurs africains.
+          <span data-fr="Étudiant en Digitalisation & Data à Sèmè City Institute of Technology and Innovation, je travaille à concevoir des outils digitaux utiles aux entreprises africaines. Je pilote deux ventures : Restafy, une solution FoodTech pour la restauration au Bénin, et AfroSite, une agence web dédiée aux entrepreneurs africains." data-en="Student in Digitalisation & Data at Sèmè City Institute of Technology and Innovation, I work on designing digital tools that are genuinely useful for African businesses. I lead two ventures: Restafy, a FoodTech solution for restaurants in Benin, and AfroSite, a web agency dedicated to African entrepreneurs.">
+            Étudiant en Digitalisation &amp; Data à Sèmè City Institute of Technology and Innovation, je travaille à concevoir des outils digitaux utiles aux entreprises africaines. Je pilote deux ventures : Restafy, une solution FoodTech pour la restauration au Bénin, et AfroSite, une agence web dédiée aux entrepreneurs africains.
           </span>
         </p>
         <p class="about-body" style="margin-top:20px">
-          <span data-fr="Je suis convaincue que la technologie doit répondre aux réalités locales. C'est ce qui guide mes projets : partir du terrain, construire ce qui est réellement nécessaire." data-en="I believe technology must respond to local realities. That's what guides my projects: start from the ground up, build what is genuinely needed.">
-            Je suis convaincue que la technologie doit répondre aux réalités locales. C'est ce qui guide mes projets : partir du terrain, construire ce qui est réellement nécessaire.
+          <span data-fr="Je suis convaincu que la technologie doit répondre aux réalités locales. C'est ce qui guide mes projets : partir du terrain, construire ce qui est réellement nécessaire." data-en="I believe technology must respond to local realities. That's what guides my projects: start from the ground up, build what is genuinely needed.">
+            Je suis convaincu que la technologie doit répondre aux réalités locales. C'est ce qui guide mes projets : partir du terrain, construire ce qui est réellement nécessaire.
           </span>
         </p>
         <div class="about-meta">
@@ -1288,8 +1330,8 @@
       </button>
       <div class="accordion-body" role="region">
         <div class="accordion-content">
-          <p class="accordion-desc" data-fr="Je suis encore étudiante. Mon approche combine la rigueur académique de Sèmè City avec la pratique terrain de mes ventures. Chaque projet m'apprend quelque chose que les cours ne couvrent pas." data-en="I'm still a student. My approach combines the academic rigor of Sèmè City with the hands-on practice of my ventures. Every project teaches me something courses don't cover.">
-            Je suis encore étudiante. Mon approche combine la rigueur académique de Sèmè City avec la pratique terrain de mes ventures. Chaque projet m'apprend quelque chose que les cours ne couvrent pas.
+          <p class="accordion-desc" data-fr="Je suis encore étudiant. Mon approche combine la rigueur académique de Sèmè City avec la pratique terrain de mes ventures. Chaque projet m'apprend quelque chose que les cours ne couvrent pas." data-en="I'm still a student. My approach combines the academic rigor of Sèmè City with the hands-on practice of my ventures. Every project teaches me something courses don't cover.">
+            Je suis encore étudiant. Mon approche combine la rigueur académique de Sèmè City avec la pratique terrain de mes ventures. Chaque projet m'apprend quelque chose que les cours ne couvrent pas.
           </p>
           <div class="accordion-stack">
             <span class="stack-tag">Python</span>
@@ -1376,7 +1418,7 @@
         <p class="project-desc" data-fr="Agence web spécialisée dans la création de sites sur mesure pour les entreprises africaines souhaitant une présence digitale solide et professionnelle. Direction créative, gestion de projet et acquisition clients." data-en="Web agency specialised in creating tailor-made websites for African businesses seeking a strong and professional digital presence. Creative direction, project management, and client acquisition.">
           Agence web spécialisée dans la création de sites sur mesure pour les entreprises africaines souhaitant une présence digitale solide et professionnelle. Direction créative, gestion de projet et acquisition clients.
         </p>
-        <p class="project-impact" data-fr="Positionnée comme référence du design web premium en Afrique francophone." data-en="Positioned as a reference for premium web design in francophone Africa.">Positionnée comme référence du design web premium en Afrique francophone.</p>
+        <p class="project-impact" data-fr="En activité — plusieurs clients accompagnés depuis janvier 2025." data-en="Active — several clients served since January 2025.">En activité — plusieurs clients accompagnés depuis janvier 2025.</p>
         <div class="project-tech">
           <span class="tech-badge">HTML / CSS</span>
           <span class="tech-badge">JavaScript</span>
@@ -1411,17 +1453,17 @@
       <tbody>
         <tr>
           <td>Jan. 2025 — …</td>
-          <td data-fr="Fondatrice, AfroSite" data-en="Founder, AfroSite">Fondatrice, AfroSite</td>
+          <td data-fr="Fondateur, AfroSite" data-en="Founder, AfroSite">Fondateur, AfroSite</td>
           <td data-fr="Agence web — sites sur mesure pour entreprises africaines. Acquisition clients, gestion de projet, direction créative." data-en="Web agency — custom websites for African businesses. Client acquisition, project management, creative direction.">Agence web — sites sur mesure pour entreprises africaines. Acquisition clients, gestion de projet, direction créative.</td>
         </tr>
         <tr>
           <td>Nov. 2025 — …</td>
-          <td data-fr="Fondatrice & Product Lead, Restafy" data-en="Founder & Product Lead, Restafy">Fondatrice &amp; Product Lead, Restafy</td>
+          <td data-fr="Fondateur & Product Lead, Restafy" data-en="Founder & Product Lead, Restafy">Fondateur &amp; Product Lead, Restafy</td>
           <td data-fr="Solution FoodTech pour la restauration africaine — vision produit, recherche utilisateur, MVP." data-en="FoodTech solution for African restaurants — product vision, user research, MVP.">Solution FoodTech pour la restauration africaine — vision produit, recherche utilisateur, MVP.</td>
         </tr>
         <tr>
           <td>2025 — …</td>
-          <td data-fr="Étudiante, Sèmè City" data-en="Student, Sèmè City">Étudiante, Sèmè City</td>
+          <td data-fr="Étudiant, Sèmè City" data-en="Student, Sèmè City">Étudiant, Sèmè City</td>
           <td data-fr="Sèmè City Institute of Technology and Innovation — Digitalisation & Data Science." data-en="Sèmè City Institute of Technology and Innovation — Digitalisation & Data Science.">Sèmè City Institute of Technology and Innovation — Digitalisation &amp; Data Science.</td>
         </tr>
       </tbody>
@@ -1451,7 +1493,36 @@
 </section>
 
 <!-- =====================
-     8. CONTACT
+     8. RÉSEAU
+===================== -->
+<section id="reseau">
+  <div class="container">
+    <div class="section-label reveal" data-fr="Réseau" data-en="Network">Réseau</div>
+    <h2 class="research-heading reveal" style="margin-bottom:48px">
+      <span data-fr="Retrouvez-moi" data-en="Find me">Retrouvez-moi</span><br>
+      <em data-fr="en ligne." data-en="online.">en ligne.</em>
+    </h2>
+    <div class="reseau-grid reveal">
+      <a href="https://www.linkedin.com/in/sourakahamida" target="_blank" rel="noopener noreferrer" class="reseau-card">
+        <div class="reseau-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div class="reseau-name">LinkedIn</div>
+        <div class="reseau-handle">@sourakahamida</div>
+      </a>
+      <a href="mailto:bagoudou046@gmail.com" class="reseau-card">
+        <div class="reseau-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+        <div class="reseau-name">Email</div>
+        <div class="reseau-handle">bagoudou046@gmail.com</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     9. CONTACT
 ===================== -->
 <section id="contact">
   <div class="container">
@@ -1462,8 +1533,8 @@
           <span data-fr="Construisons" data-en="Let's build">Construisons</span><br>
           <em data-fr="quelque chose." data-en="something.">quelque chose.</em>
         </h2>
-        <p class="contact-sub" data-fr="Ouverte aux collaborations, projets data et conversations autour de la tech en Afrique." data-en="Open to collaborations, data projects, and conversations around tech in Africa.">
-          Ouverte aux collaborations, projets data et conversations autour de la tech en Afrique.
+        <p class="contact-sub" data-fr="Ouvert aux collaborations, projets data et conversations autour de la tech en Afrique." data-en="Open to collaborations, data projects, and conversations around tech in Africa.">
+          Ouvert aux collaborations, projets data et conversations autour de la tech en Afrique.
         </p>
         <div class="contact-links">
           <a href="mailto:bagoudou046@gmail.com" class="contact-link">
@@ -1478,8 +1549,8 @@
       </div>
       <div class="reveal" style="transition-delay:0.2s">
         <blockquote class="contact-quote">
-          <span data-fr='"Les données ne valent rien sans les bonnes questions."' data-en='"Data is worth nothing without the right questions."'>
-            "Les données ne valent rien sans les bonnes questions."
+          <span data-fr='"Le meilleur moment pour l&#39;Afrique, c&#39;était il y a dix ans. Le deuxième, c&#39;est aujourd&#39;hui."' data-en='"The best time for Africa was ten years ago. The second best time is now."'>
+            "Le meilleur moment pour l'Afrique, c'était il y a dix ans. Le deuxième, c'est aujourd'hui."
           </span>
           <cite data-fr="— Souraka Hamida" data-en="— Souraka Hamida">— Souraka Hamida</cite>
         </blockquote>
