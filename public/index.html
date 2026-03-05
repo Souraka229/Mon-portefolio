@@ -32,6 +32,14 @@
       --font-body: 'DM Sans', sans-serif;
     }
 
+    [data-theme="light"] {
+      --bg: #f9f7f4;
+      --fg: #1a1815;
+      --accent: #b8860b;
+      --muted: #8b7f6f;
+      --border: rgba(184, 134, 11, 0.15);
+    }
+
     html { scroll-behavior: smooth; }
 
     body {
@@ -214,6 +222,20 @@
       transition: background 0.2s, color 0.2s;
     }
     #lang-btn:hover { background: var(--accent); color: var(--bg); }
+    #theme-btn {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--accent);
+      padding: 5px 12px;
+      cursor: none;
+      transition: background 0.2s, color 0.2s;
+      margin-left: 12px;
+    }
+    #theme-btn:hover { background: var(--accent); color: var(--bg); }
     .nav-hamburger {
       display: none;
       flex-direction: column;
@@ -1099,6 +1121,7 @@
       <li><a href="#reseau" data-fr="Réseau" data-en="Network">Réseau</a></li>
       <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
       <li><button id="lang-btn" aria-label="Switch language">EN</button></li>
+      <li><button id="theme-btn" aria-label="Switch theme">☀</button></li>
     </ul>
   </nav>
   <button class="nav-hamburger" id="hamburger" aria-label="Open mobile menu" aria-expanded="false">
@@ -1685,6 +1708,41 @@
     currentLang = currentLang === 'fr' ? 'en' : 'fr';
     applyLang(currentLang);
   });
+
+  // =============================
+  // THEME TOGGLE
+  // =============================
+  const themeBtn = document.getElementById('theme-btn');
+  const html = document.documentElement;
+  
+  // Initialize theme from localStorage or system preference
+  function initTheme() {
+    const saved = localStorage.getItem('theme');
+    let theme = saved;
+    if (!theme) {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    applyTheme(theme);
+  }
+  
+  function applyTheme(theme) {
+    if (theme === 'light') {
+      html.setAttribute('data-theme', 'light');
+      themeBtn.textContent = '🌙';
+    } else {
+      html.removeAttribute('data-theme');
+      themeBtn.textContent = '☀';
+    }
+    localStorage.setItem('theme', theme);
+  }
+  
+  themeBtn.addEventListener('click', function() {
+    const current = localStorage.getItem('theme') || 'dark';
+    const next = current === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+  });
+  
+  initTheme();
 
   // =============================
   // MOBILE HAMBURGER
