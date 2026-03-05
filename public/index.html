@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Souraka HAMIDA — Data Scientist & Tech Entrepreneur from Benin, West Africa. Transforming raw data into decisions and decisions into evolving systems." />
+  <meta name="author" content="Souraka HAMIDA" />
+  <meta property="og:title" content="Souraka HAMIDA — Data Scientist & Tech Entrepreneur" />
+  <meta property="og:description" content="Transforming raw data into decisions and decisions into evolving systems. Based in Cotonou, Benin." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0d0c09" />
+  <title>Souraka HAMIDA — Data Science & Digitalisation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =============================
+       RESET & ROOT
+    ============================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0c09;
+      --fg: #ede8dc;
+      --accent: #c9a96e;
+      --muted: #7a7568;
+      --border: rgba(201, 169, 110, 0.18);
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      cursor: none;
+      overflow-x: hidden;
+    }
+
+    /* =============================
+       SCROLLBAR
+    ============================= */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+    /* =============================
+       CUSTOM CURSOR
+    ============================= */
+    #cursor {
+      position: fixed;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      mix-blend-mode: normal;
+    }
+    #cursor-dot {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
+    body:has(a:hover) #cursor,
+    body:has(button:hover) #cursor {
+      width: 36px;
+      height: 36px;
+      background: rgba(201,169,110,0.08);
+    }
+
+    /* =============================
+       PROGRESS BAR
+    ============================= */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: var(--accent);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* =============================
+       LOADER
+    ============================= */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9998;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-monogram {
+      font-family: var(--font-heading);
+      font-size: clamp(4rem, 12vw, 9rem);
+      font-weight: 300;
+      color: var(--fg);
+      letter-spacing: 0.08em;
+      position: relative;
+    }
+    .loader-monogram span { color: var(--accent); font-style: italic; }
+    .loader-line {
+      position: absolute;
+      bottom: -8px; left: 0;
+      height: 1px;
+      background: var(--accent);
+      width: 0%;
+      animation: loaderLine 1.4s ease forwards;
+    }
+    @keyframes loaderLine {
+      to { width: 100%; }
+    }
+    .loader-sub {
+      position: absolute;
+      bottom: -30px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      color: var(--muted);
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeIn 0.4s ease 1s forwards;
+    }
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    /* =============================
+       GRAIN OVERLAY
+    ============================= */
+    #grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9000;
+      opacity: 0.028;
+    }
+
+    /* =============================
+       NAVBAR
+    ============================= */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 500;
+      padding: 28px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: padding 0.4s ease, background 0.4s ease, backdrop-filter 0.4s ease;
+    }
+    #navbar.scrolled {
+      padding: 14px 56px;
+      background: rgba(13, 12, 9, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--fg);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); font-style: italic; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    #lang-btn {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--accent);
+      padding: 5px 12px;
+      cursor: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    #lang-btn:hover { background: var(--accent); color: var(--bg); }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: none;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--fg);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* =============================
+       MOBILE NAV
+    ============================= */
+    #mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 490;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    #mobile-nav.open { display: flex; opacity: 1; }
+    #mobile-nav a {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--fg);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    #mobile-nav a:hover { color: var(--accent); }
+
+    /* =============================
+       SECTION WRAPPER
+    ============================= */
+    section {
+      position: relative;
+      overflow: hidden;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 56px;
+    }
+
+    /* =============================
+       SCROLL REVEAL
+    ============================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* =============================
+       SECTION LABEL
+    ============================= */
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 56px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    /* =============================
+       1. HERO
+    ============================= */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding-top: 120px;
+      padding-bottom: 80px;
+    }
+    .hero-left {
+      padding-right: 60px;
+    }
+    .hero-kicker {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-kicker::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(4rem, 8vw, 7.5rem);
+      font-weight: 300;
+      line-height: 0.92;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+    .hero-title .first { display: block; }
+    .hero-title .last {
+      display: block;
+      color: var(--accent);
+      font-style: italic;
+    }
+    .hero-slogan {
+      font-family: var(--font-heading);
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 36px;
+      border-left: 1px solid var(--border);
+      padding-left: 18px;
+      font-style: italic;
+    }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 44px;
+    }
+    .hero-tag {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      color: var(--muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .hero-tag:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 14px 28px;
+      display: inline-block;
+      transition: opacity 0.2s ease;
+    }
+    .btn-primary:hover { opacity: 0.82; }
+    .btn-outline {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      color: var(--fg);
+      padding: 14px 28px;
+      display: inline-block;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Hero image with gold corners */
+    .hero-image-wrap {
+      position: relative;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .hero-image-inner {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+    }
+    .hero-image-inner img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(15%) contrast(1.04);
+    }
+    /* Gold corner accents */
+    .gold-corner {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      pointer-events: none;
+    }
+    .gold-corner.tl { top: -6px; left: -6px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+    .gold-corner.tr { top: -6px; right: -6px; border-top: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+    .gold-corner.bl { bottom: -6px; left: -6px; border-bottom: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+    .gold-corner.br { bottom: -6px; right: -6px; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+    .hero-img-label {
+      position: absolute;
+      bottom: 20px;
+      right: -28px;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 56px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--accent);
+      animation: scrollDrop 1.8s ease infinite;
+    }
+    @keyframes scrollDrop {
+      0% { top: -100%; }
+      100% { top: 100%; }
+    }
+    .scroll-label {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* =============================
+       TICKER
+    ============================= */
+    #ticker {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-inner {
+      display: inline-flex;
+      gap: 0;
+      animation: tickerMove 28s linear infinite;
+    }
+    .ticker-item {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .ticker-item span { color: var(--accent); font-size: 0.55rem; }
+    @keyframes tickerMove {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* =============================
+       2. ABOUT
+    ============================= */
+    #about { padding: 120px 0; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .about-left {
+      position: sticky;
+      top: 120px;
+    }
+    .about-heading {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+    .about-heading em { color: var(--accent); }
+    .about-body { color: var(--muted); font-size: 1.05rem; line-height: 1.75; }
+    .about-body p + p { margin-top: 20px; }
+    .about-meta {
+      margin-top: 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .about-meta-row {
+      display: flex;
+      gap: 24px;
+      align-items: baseline;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+    }
+    .about-meta-key {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      min-width: 80px;
+    }
+    .about-meta-val { font-size: 0.9rem; color: var(--fg); }
+
+    /* =============================
+       3. SKILLS
+    ============================= */
+    #skills { padding: 120px 0; border-top: 1px solid var(--border); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .skill-col {
+      border: 1px solid var(--border);
+      padding: 44px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+    .skill-col::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 0;
+      background: rgba(201, 169, 110, 0.04);
+      transition: height 0.5s ease;
+    }
+    .skill-col:hover::before { height: 100%; }
+    .skill-col:hover { border-color: var(--accent); }
+    .skill-col-number {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .skill-col-title {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      margin-bottom: 28px;
+    }
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .skill-list li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s;
+    }
+    .skill-col:hover .skill-list li { color: var(--fg); }
+    .skill-list li::before {
+      content: '';
+      width: 14px;
+      height: 1px;
+      background: var(--accent);
+      flex-shrink: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .skill-col:hover .skill-list li::before { opacity: 1; }
+
+    /* =============================
+       4. RESEARCH / CASE STUDIES
+    ============================= */
+    #research { padding: 120px 0; border-top: 1px solid var(--border); }
+    .research-heading {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      margin-bottom: 64px;
+      line-height: 1.1;
+    }
+    .research-heading em { color: var(--accent); font-style: italic; }
+    .accordion-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .accordion-trigger {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 28px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: none;
+      text-align: left;
+    }
+    .accordion-left {
+      display: flex;
+      align-items: baseline;
+      gap: 28px;
+    }
+    .accordion-num {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      min-width: 28px;
+    }
+    .accordion-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 400;
+      color: var(--fg);
+      transition: color 0.2s;
+    }
+    .accordion-trigger:hover .accordion-title { color: var(--accent); }
+    .accordion-icon {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      color: var(--muted);
+      transition: transform 0.35s ease, color 0.2s;
+      line-height: 1;
+    }
+    .accordion-item.open .accordion-icon { transform: rotate(45deg); color: var(--accent); }
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    .accordion-item.open .accordion-body { max-height: 320px; }
+    .accordion-content {
+      padding: 0 0 36px 56px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 48px;
+    }
+    .accordion-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+    .accordion-stack { display: flex; flex-wrap: wrap; gap: 8px; align-content: flex-start; }
+    .stack-tag {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      color: var(--accent);
+    }
+
+    /* =============================
+       5. PROJECTS
+    ============================= */
+    #projects { padding: 120px 0; border-top: 1px solid var(--border); }
+    .projects-heading {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      margin-bottom: 64px;
+    }
+    .projects-heading em { color: var(--accent); }
+    .project-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      padding: 56px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .project-card:nth-child(even) .project-info { order: -1; }
+    .project-image {
+      position: relative;
+      overflow: hidden;
+    }
+    .project-image img {
+      width: 100%;
+      aspect-ratio: 16/7;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(20%) contrast(1.05);
+      transition: transform 0.8s ease, filter 0.4s ease;
+    }
+    .project-card:hover .project-image img {
+      transform: scale(1.04);
+      filter: grayscale(0%) contrast(1.05);
+    }
+    /* gold corners on project images */
+    .project-image .gold-corner.tl { top: -5px; left: -5px; }
+    .project-image .gold-corner.tr { top: -5px; right: -5px; }
+    .project-image .gold-corner.bl { bottom: -5px; left: -5px; }
+    .project-image .gold-corner.br { bottom: -5px; right: -5px; }
+    .project-num {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .project-name {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+    .project-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .project-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .project-impact {
+      font-size: 0.85rem;
+      color: var(--fg);
+      font-style: italic;
+      border-left: 2px solid var(--accent);
+      padding-left: 14px;
+      margin-bottom: 24px;
+    }
+    .project-tech { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tech-badge {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: rgba(201,169,110,0.08);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 4px 10px;
+    }
+
+    /* =============================
+       6. TIMELINE
+    ============================= */
+    #timeline { padding: 120px 0; border-top: 1px solid var(--border); }
+    .timeline-heading {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      margin-bottom: 64px;
+    }
+    .timeline-heading em { color: var(--accent); }
+    .timeline-table { width: 100%; border-collapse: collapse; }
+    .timeline-table thead tr {
+      border-bottom: 1px solid var(--border);
+    }
+    .timeline-table th {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 0 16px;
+      text-align: left;
+      font-weight: 400;
+    }
+    .timeline-table th:first-child { width: 120px; }
+    .timeline-table th:nth-child(2) { width: 260px; }
+    .timeline-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .timeline-table tbody tr:hover { background: rgba(201,169,110,0.03); }
+    .timeline-table td {
+      padding: 22px 0;
+      vertical-align: top;
+    }
+    .timeline-table td:first-child {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+    }
+    .timeline-table td:nth-child(2) {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 400;
+      padding-right: 32px;
+    }
+    .timeline-table td:nth-child(3) {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* =============================
+       7. VISION
+    ============================= */
+    #vision { padding: 160px 0; border-top: 1px solid var(--border); text-align: center; }
+    .vision-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+    .vision-heading {
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 6vw, 5.5rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      line-height: 1.08;
+      max-width: 900px;
+      margin: 0 auto 40px;
+    }
+    .vision-heading em { color: var(--accent); font-style: italic; }
+    .vision-body {
+      max-width: 620px;
+      margin: 0 auto;
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .vision-dots {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 60px;
+    }
+    .vision-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+    .vision-dot.active { background: var(--accent); }
+
+    /* =============================
+       8. CONTACT
+    ============================= */
+    #contact { padding: 120px 0; border-top: 1px solid var(--border); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+    }
+    .contact-heading {
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 28px;
+    }
+    .contact-heading em { color: var(--accent); }
+    .contact-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.65; margin-bottom: 40px; }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      text-decoration: none;
+      color: var(--fg);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-link-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      min-width: 64px;
+    }
+    .contact-link-value { font-size: 0.95rem; }
+    .contact-quote {
+      font-family: var(--font-heading);
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--muted);
+      border-left: 2px solid var(--accent);
+      padding-left: 24px;
+    }
+    .contact-quote cite {
+      display: block;
+      font-style: normal;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 16px;
+    }
+
+    /* =============================
+       FOOTER
+    ============================= */
+    footer {
+      padding: 36px 56px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+    .footer-copy span { color: var(--accent); }
+
+    /* =============================
+       RESPONSIVE
+    ============================= */
+    @media (max-width: 1024px) {
+      #hero { grid-template-columns: 1fr; padding-top: 140px; }
+      .hero-left { padding-right: 0; margin-bottom: 48px; }
+      .hero-image-wrap { justify-content: center; }
+      .hero-image-inner { max-width: 340px; }
+      .hero-img-label { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-left { position: static; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .project-card { grid-template-columns: 1fr; }
+      .project-card:nth-child(even) .project-info { order: 0; }
+      .contact-grid { grid-template-columns: 1fr; gap: 56px; }
+      .timeline-table td:nth-child(3) { display: none; }
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 24px; }
+      #navbar { padding: 20px 24px; }
+      #navbar.scrolled { padding: 12px 24px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      footer { padding: 28px 24px; flex-direction: column; gap: 12px; text-align: center; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .accordion-content { grid-template-columns: 1fr; }
+      .scroll-indicator { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- GRAIN OVERLAY -->
+<svg id="grain" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+  <filter id="noise">
+    <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#noise)"/>
+</svg>
+
+<!-- CUSTOM CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-dot"></div>
+
+<!-- PROGRESS BAR -->
+<div id="progress-bar"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div style="position:relative; text-align:center;">
+    <div class="loader-monogram">S<span>H</span>
+      <div class="loader-line"></div>
+    </div>
+    <div class="loader-sub" data-fr="Data Science · Digitalisation" data-en="Data Science · Digitalisation">Data Science · Digitalisation</div>
+  </div>
+</div>
+
+<!-- MOBILE NAV -->
+<nav id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+  <a href="#about" data-fr="À Propos" data-en="About">À Propos</a>
+  <a href="#skills" data-fr="Compétences" data-en="Skills">Compétences</a>
+  <a href="#research" data-fr="Recherche" data-en="Research">Recherche</a>
+  <a href="#projects" data-fr="Projets" data-en="Projects">Projets</a>
+  <a href="#contact" data-fr="Contact" data-en="Contact">Contact</a>
+</nav>
+
+<!-- NAVBAR -->
+<header id="navbar" role="banner">
+  <a href="#hero" class="nav-logo" aria-label="Souraka HAMIDA - Home">Souraka <span>HAMIDA</span></a>
+  <nav role="navigation" aria-label="Main navigation">
+    <ul class="nav-links">
+      <li><a href="#about" data-fr="À Propos" data-en="About">À Propos</a></li>
+      <li><a href="#skills" data-fr="Compétences" data-en="Skills">Compétences</a></li>
+      <li><a href="#research" data-fr="Recherche" data-en="Research">Recherche</a></li>
+      <li><a href="#projects" data-fr="Projets" data-en="Projects">Projets</a></li>
+      <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
+      <li><button id="lang-btn" aria-label="Switch language">EN</button></li>
+    </ul>
+  </nav>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open mobile menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- =====================
+     1. HERO
+===================== -->
+<section id="hero" class="container">
+  <div class="hero-left reveal">
+    <div class="hero-kicker">
+      <span data-fr="Data Scientist · Bénin, Afrique de l'Ouest" data-en="Data Scientist · Benin, West Africa">Data Scientist · Bénin, Afrique de l'Ouest</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="first">Souraka</span>
+      <span class="last">HAMIDA</span>
+    </h1>
+    <p class="hero-slogan" data-fr="Je transforme les données brutes en décisions — et les décisions en systèmes qui évoluent." data-en="I transform raw data into decisions — and decisions into systems that evolve.">
+      Je transforme les données brutes en décisions — et les décisions en systèmes qui évoluent.
+    </p>
+    <div class="hero-tags">
+      <span class="hero-tag">Data Science</span>
+      <span class="hero-tag">Machine Learning</span>
+      <span class="hero-tag">AI Systems</span>
+      <span class="hero-tag" data-fr="Entrepreneuriat Tech" data-en="Tech Entrepreneurship">Entrepreneuriat Tech</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary" data-fr="Voir mes projets" data-en="View my work">Voir mes projets</a>
+      <a href="#contact" class="btn-outline" data-fr="Me contacter" data-en="Get in touch">Me contacter</a>
+    </div>
+  </div>
+  <div class="hero-image-wrap reveal" style="transition-delay:0.2s">
+    <div class="hero-image-inner">
+      <div class="gold-corner tl"></div>
+      <div class="gold-corner tr"></div>
+      <div class="gold-corner bl"></div>
+      <div class="gold-corner br"></div>
+      <img src="profile.jpg" alt="Portrait de Souraka HAMIDA, Data Scientist" onerror="this.style.background='#1a1916';this.style.aspectRatio='3/4';this.removeAttribute('src')" />
+      <div class="hero-img-label" data-fr="Cotonou, Bénin · 2025" data-en="Cotonou, Benin · 2025">Cotonou, Bénin · 2025</div>
+    </div>
+  </div>
+  <div class="scroll-indicator" aria-hidden="true">
+    <div class="scroll-line"></div>
+    <span class="scroll-label" data-fr="Défiler" data-en="Scroll">Défiler</span>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div id="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <!-- Repeated for seamless loop -->
+    <span class="ticker-item">Data Analysis <span>✦</span></span>
+    <span class="ticker-item">Machine Learning <span>✦</span></span>
+    <span class="ticker-item">SQL &amp; Python <span>✦</span></span>
+    <span class="ticker-item">Tech Entrepreneurship <span>✦</span></span>
+    <span class="ticker-item">West Africa <span>✦</span></span>
+    <span class="ticker-item">Data Visualization <span>✦</span></span>
+    <span class="ticker-item">AI Systems <span>✦</span></span>
+    <span class="ticker-item">SCITI <span>✦</span></span>
+    <span class="ticker-item">Cotonou, Bénin <span>✦</span></span>
+    <span class="ticker-item">Digital Innovation <span>✦</span></span>
+    <!-- Duplicate for seamless loop -->
+    <span class="ticker-item">Data Analysis <span>✦</span></span>
+    <span class="ticker-item">Machine Learning <span>✦</span></span>
+    <span class="ticker-item">SQL &amp; Python <span>✦</span></span>
+    <span class="ticker-item">Tech Entrepreneurship <span>✦</span></span>
+    <span class="ticker-item">West Africa <span>✦</span></span>
+    <span class="ticker-item">Data Visualization <span>✦</span></span>
+    <span class="ticker-item">AI Systems <span>✦</span></span>
+    <span class="ticker-item">SCITI <span>✦</span></span>
+    <span class="ticker-item">Cotonou, Bénin <span>✦</span></span>
+    <span class="ticker-item">Digital Innovation <span>✦</span></span>
+  </div>
+</div>
+
+<!-- =====================
+     2. ABOUT
+===================== -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <div class="section-label" data-fr="À Propos" data-en="About">À Propos</div>
+        <h2 class="about-heading" data-fr="La data rencontre l'<em>intelligence</em> business." data-en="Where data meets business <em>intelligence</em>.">La data rencontre l'<em>intelligence</em> business.</h2>
+      </div>
+      <div class="reveal" style="transition-delay:0.15s">
+        <p class="about-body">
+          <span data-fr="Étudiante en Digitalisation & Data à Sèmè City Institute of Technology and Innovation, je développe des systèmes capables de transformer les données en décisions stratégiques." data-en="Student in Digitalisation & Data at Sèmè City Institute of Technology and Innovation, I build systems capable of transforming raw data into strategic decisions.">
+            Étudiante en Digitalisation & Data à Sèmè City Institute of Technology and Innovation, je développe des systèmes capables de transformer les données en décisions stratégiques.
+          </span>
+        </p>
+        <p class="about-body" style="margin-top:20px">
+          <span data-fr="Je m'intéresse particulièrement à l'application de l'intelligence artificielle dans les marchés africains émergents — construire une infrastructure technologique qui répond aux réalités du continent." data-en="I am particularly interested in applying artificial intelligence to emerging African markets — building a technological infrastructure that responds to the realities of the continent.">
+            Je m'intéresse particulièrement à l'application de l'intelligence artificielle dans les marchés africains émergents — construire une infrastructure technologique qui répond aux réalités du continent.
+          </span>
+        </p>
+        <div class="about-meta">
+          <div class="about-meta-row">
+            <span class="about-meta-key" data-fr="Statut" data-en="Status">Statut</span>
+            <span class="about-meta-val" data-fr="Bachelor Digitalisation & Data — SCITI" data-en="Bachelor Digitalisation & Data — SCITI">Bachelor Digitalisation & Data — SCITI</span>
+          </div>
+          <div class="about-meta-row">
+            <span class="about-meta-key" data-fr="Lieu" data-en="Location">Lieu</span>
+            <span class="about-meta-val" data-fr="Cotonou, Bénin" data-en="Cotonou, Benin">Cotonou, Bénin</span>
+          </div>
+          <div class="about-meta-row">
+            <span class="about-meta-key" data-fr="Langues" data-en="Languages">Langues</span>
+            <span class="about-meta-val" data-fr="Français (courant) · Anglais (intermédiaire)" data-en="French (fluent) · English (intermediate)">Français (courant) · Anglais (intermédiaire)</span>
+          </div>
+          <div class="about-meta-row">
+            <span class="about-meta-key" data-fr="Email" data-en="Email">Email</span>
+            <span class="about-meta-val"><a href="mailto:bagoudou046@gmail.com" style="color:var(--accent);text-decoration:none;">bagoudou046@gmail.com</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     3. SKILLS
+===================== -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label reveal" data-fr="Compétences" data-en="Skills">Compétences</div>
+    <div class="skills-grid">
+      <div class="skill-col reveal">
+        <div class="skill-col-number">01</div>
+        <div class="skill-col-title" data-fr="Data" data-en="Data">Data</div>
+        <ul class="skill-list">
+          <li>Python</li>
+          <li>R</li>
+          <li>SQL</li>
+          <li data-fr="Statistiques" data-en="Statistics">Statistiques</li>
+          <li>Data Visualization</li>
+          <li>Machine Learning</li>
+        </ul>
+      </div>
+      <div class="skill-col reveal" style="transition-delay:0.1s">
+        <div class="skill-col-number">02</div>
+        <div class="skill-col-title" data-fr="Business" data-en="Business">Business</div>
+        <ul class="skill-list">
+          <li data-fr="Innovation digitale" data-en="Digital Innovation">Innovation digitale</li>
+          <li data-fr="Gestion de projet" data-en="Project Management">Gestion de projet</li>
+          <li data-fr="Décisions data-driven" data-en="Data-driven Decisions">Décisions data-driven</li>
+          <li data-fr="Solutions technologiques" data-en="Tech Solutions">Solutions technologiques</li>
+          <li>E-commerce</li>
+          <li>Dropshipping</li>
+        </ul>
+      </div>
+      <div class="skill-col reveal" style="transition-delay:0.2s">
+        <div class="skill-col-number">03</div>
+        <div class="skill-col-title">Build</div>
+        <ul class="skill-list">
+          <li>HTML / CSS</li>
+          <li>JavaScript</li>
+          <li data-fr="Conception produit" data-en="Product Design">Conception produit</li>
+          <li data-fr="Architecture plateforme" data-en="Platform Architecture">Architecture plateforme</li>
+          <li data-fr="Développement web" data-en="Web Development">Développement web</li>
+          <li>Kaggle</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     4. RESEARCH
+===================== -->
+<section id="research">
+  <div class="container">
+    <h2 class="research-heading reveal">
+      <span data-fr="Études de cas &" data-en="Case Studies &">Études de cas &</span><br>
+      <em data-fr="Recherche appliquée" data-en="Applied Research">Recherche appliquée</em>
+    </h2>
+
+    <div class="accordion-item">
+      <button class="accordion-trigger" aria-expanded="false">
+        <div class="accordion-left">
+          <span class="accordion-num">01</span>
+          <span class="accordion-title" data-fr="Analyse de la criminalité urbaine" data-en="Urban Crime Pattern Analysis">Analyse de la criminalité urbaine</span>
+        </div>
+        <span class="accordion-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="accordion-body" role="region">
+        <div class="accordion-content">
+          <p class="accordion-desc" data-fr="Exploration et modélisation de données de sécurité publique pour identifier des patterns spatiaux et temporels. Visualisation cartographique des zones à risque et recommandations pour les politiques publiques." data-en="Exploration and modeling of public safety data to identify spatial and temporal patterns. Cartographic visualization of risk zones and recommendations for public policies.">
+            Exploration et modélisation de données de sécurité publique pour identifier des patterns spatiaux et temporels. Visualisation cartographique des zones à risque et recommandations pour les politiques publiques.
+          </p>
+          <div class="accordion-stack">
+            <span class="stack-tag">R</span>
+            <span class="stack-tag">ggplot2</span>
+            <span class="stack-tag">SQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-trigger" aria-expanded="false">
+        <div class="accordion-left">
+          <span class="accordion-num">02</span>
+          <span class="accordion-title" data-fr="Performance académique &amp; facteurs socio-économiques" data-en="Academic Performance &amp; Socioeconomic Factors">Performance académique &amp; facteurs socio-économiques</span>
+        </div>
+        <span class="accordion-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="accordion-body" role="region">
+        <div class="accordion-content">
+          <p class="accordion-desc" data-fr="Analyse multivariée des corrélations entre les indicateurs socio-économiques et les résultats académiques. Modélisation prédictive avec régression et arbres de décision." data-en="Multivariate analysis of correlations between socioeconomic indicators and academic outcomes. Predictive modeling with regression and decision trees.">
+            Analyse multivariée des corrélations entre les indicateurs socio-économiques et les résultats académiques. Modélisation prédictive avec régression et arbres de décision.
+          </p>
+          <div class="accordion-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">Pandas</span>
+            <span class="stack-tag">Sklearn</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-trigger" aria-expanded="false">
+        <div class="accordion-left">
+          <span class="accordion-num">03</span>
+          <span class="accordion-title" data-fr="Mortalité en USI — modélisation prédictive" data-en="ICU Mortality — Predictive Modeling">Mortalité en USI — modélisation prédictive</span>
+        </div>
+        <span class="accordion-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="accordion-body" role="region">
+        <div class="accordion-content">
+          <p class="accordion-desc" data-fr="Construction d'un modèle de classification pour prédire les risques de mortalité en unités de soins intensifs. Prétraitement de données médicales complexes, sélection de features, validation croisée." data-en="Building a classification model to predict mortality risks in intensive care units. Complex medical data preprocessing, feature selection, and cross-validation.">
+            Construction d'un modèle de classification pour prédire les risques de mortalité en unités de soins intensifs. Prétraitement de données médicales complexes, sélection de features, validation croisée.
+          </p>
+          <div class="accordion-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">ML</span>
+            <span class="stack-tag">Kaggle</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-trigger" aria-expanded="false">
+        <div class="accordion-left">
+          <span class="accordion-num">04</span>
+          <span class="accordion-title" data-fr="Segmentation clients pour l'e-commerce" data-en="Customer Segmentation for E-commerce">Segmentation clients pour l'e-commerce</span>
+        </div>
+        <span class="accordion-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="accordion-body" role="region">
+        <div class="accordion-content">
+          <p class="accordion-desc" data-fr="Clustering K-Means et analyse RFM appliqués à des données transactionnelles e-commerce. Identification de 5 segments clients distincts pour une stratégie marketing personnalisée." data-en="K-Means clustering and RFM analysis applied to e-commerce transactional data. Identification of 5 distinct customer segments for a personalized marketing strategy.">
+            Clustering K-Means et analyse RFM appliqués à des données transactionnelles e-commerce. Identification de 5 segments clients distincts pour une stratégie marketing personnalisée.
+          </p>
+          <div class="accordion-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">K-Means</span>
+            <span class="stack-tag">SQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-trigger" aria-expanded="false">
+        <div class="accordion-left">
+          <span class="accordion-num">05</span>
+          <span class="accordion-title" data-fr="Tendances de santé publique en Afrique" data-en="Public Health Trends in Africa">Tendances de santé publique en Afrique</span>
+        </div>
+        <span class="accordion-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="accordion-body" role="region">
+        <div class="accordion-content">
+          <p class="accordion-desc" data-fr="Visualisation des indicateurs de santé publique sub-saharienne sur 20 ans. Analyse des corrélations entre accès aux soins, pauvreté et mortalité infantile. Dashboards interactifs pour la prise de décision en santé." data-en="Visualization of sub-Saharan public health indicators over 20 years. Analysis of correlations between healthcare access, poverty, and child mortality. Interactive dashboards for health decision-making.">
+            Visualisation des indicateurs de santé publique sub-saharienne sur 20 ans. Analyse des corrélations entre accès aux soins, pauvreté et mortalité infantile. Dashboards interactifs pour la prise de décision en santé.
+          </p>
+          <div class="accordion-stack">
+            <span class="stack-tag">R</span>
+            <span class="stack-tag">Tableau</span>
+            <span class="stack-tag">Python</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =====================
+     5. PROJECTS
+===================== -->
+<section id="projects">
+  <div class="container">
+    <h2 class="projects-heading reveal">
+      <span data-fr="Projets" data-en="Projects">Projets</span> <em data-fr="sélectionnés" data-en="selected">sélectionnés</em>
+    </h2>
+
+    <!-- RESTAFY -->
+    <div class="project-card reveal">
+      <div class="project-image">
+        <div class="gold-corner tl"></div>
+        <div class="gold-corner tr"></div>
+        <div class="gold-corner bl"></div>
+        <div class="gold-corner br"></div>
+        <img src="restafy-preview.jpg" alt="Restafy — Plateforme FoodTech" onerror="this.style.background='#1a1916';this.style.minHeight='240px';this.removeAttribute('src')" />
+      </div>
+      <div class="project-info">
+        <div class="project-num">01</div>
+        <h3 class="project-name">Restafy</h3>
+        <div class="project-subtitle" data-fr="Venture FoodTech · Afrique de l'Ouest" data-en="FoodTech Venture · West Africa">Venture FoodTech · Afrique de l'Ouest</div>
+        <p class="project-desc" data-fr="Plateforme digitale visant à transformer l'industrie de la restauration et de l'événementiel en Afrique de l'Ouest. Architecture produit complète, de la conception à la mise en ligne." data-en="Digital platform aimed at transforming the restaurant and events industry in West Africa. Full product architecture, from conception to deployment.">
+          Plateforme digitale visant à transformer l'industrie de la restauration et de l'événementiel en Afrique de l'Ouest. Architecture produit complète, de la conception à la mise en ligne.
+        </p>
+        <p class="project-impact" data-fr="Site web fonctionnel + prototype application mobile déployé." data-en="Functional website + deployed mobile application prototype.">Site web fonctionnel + prototype application mobile déployé.</p>
+        <div class="project-tech">
+          <span class="tech-badge">JavaScript</span>
+          <span class="tech-badge">SQL</span>
+          <span class="tech-badge" data-fr="Conception produit" data-en="Product Design">Conception produit</span>
+          <span class="tech-badge" data-fr="Architecture plateforme" data-en="Platform Arch.">Architecture plateforme</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AFROSITE -->
+    <div class="project-card reveal">
+      <div class="project-image">
+        <div class="gold-corner tl"></div>
+        <div class="gold-corner tr"></div>
+        <div class="gold-corner bl"></div>
+        <div class="gold-corner br"></div>
+        <img src="afrosite-preview.jpg" alt="Afrosite — Plateforme digitale africaine" onerror="this.style.background='#1a1916';this.style.minHeight='240px';this.removeAttribute('src')" />
+      </div>
+      <div class="project-info">
+        <div class="project-num">02</div>
+        <h3 class="project-name">Afrosite</h3>
+        <div class="project-subtitle" data-fr="Plateforme Digitale · Marchés Africains" data-en="Digital Platform · African Markets">Plateforme Digitale · Marchés Africains</div>
+        <p class="project-desc" data-fr="Solution web sur mesure pour les entrepreneurs africains — présence digitale complète, gestion de contenu et outils analytics intégrés pour le marché local." data-en="Custom web solution for African entrepreneurs — full digital presence, content management and integrated analytics tools for the local market.">
+          Solution web sur mesure pour les entrepreneurs africains — présence digitale complète, gestion de contenu et outils analytics intégrés pour le marché local.
+        </p>
+        <p class="project-impact" data-fr="Infrastructure digitale adaptée aux contraintes des marchés émergents." data-en="Digital infrastructure adapted to the constraints of emerging markets.">Infrastructure digitale adaptée aux contraintes des marchés émergents.</p>
+        <div class="project-tech">
+          <span class="tech-badge">HTML / CSS</span>
+          <span class="tech-badge">JavaScript</span>
+          <span class="tech-badge">Analytics</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI INFRASTRUCTURE -->
+    <div class="project-card reveal">
+      <div class="project-image">
+        <div class="gold-corner tl"></div>
+        <div class="gold-corner tr"></div>
+        <div class="gold-corner bl"></div>
+        <div class="gold-corner br"></div>
+        <img src="ai-infra-preview.jpg" alt="Infrastructure IA — Marchés émergents" onerror="this.style.background='#1a1916';this.style.minHeight='240px';this.removeAttribute('src')" />
+      </div>
+      <div class="project-info">
+        <div class="project-num">03</div>
+        <h3 class="project-name" data-fr="Infrastructure IA" data-en="AI Infrastructure">Infrastructure IA</h3>
+        <div class="project-subtitle" data-fr="Recherche & Modélisation · Kaggle" data-en="Research & Modeling · Kaggle">Recherche & Modélisation · Kaggle</div>
+        <p class="project-desc" data-fr="Analyse et modélisation de datasets publics pour explorer des problématiques concrètes : prédiction, classification, segmentation. Contribution active sur Kaggle avec focus sur les données africaines." data-en="Analysis and modeling of public datasets to explore concrete problems: prediction, classification, segmentation. Active Kaggle contributions focusing on African data.">
+          Analyse et modélisation de datasets publics pour explorer des problématiques concrètes : prédiction, classification, segmentation. Contribution active sur Kaggle avec focus sur les données africaines.
+        </p>
+        <p class="project-impact" data-fr="Modèles ML applicables aux marchés émergents africains." data-en="ML models applicable to African emerging markets.">Modèles ML applicables aux marchés émergents africains.</p>
+        <div class="project-tech">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">R</span>
+          <span class="tech-badge">ML</span>
+          <span class="tech-badge">Kaggle</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =====================
+     6. TIMELINE
+===================== -->
+<section id="timeline">
+  <div class="container">
+    <h2 class="timeline-heading reveal">
+      <em data-fr="Parcours" data-en="Journey">Parcours</em>
+    </h2>
+    <table class="timeline-table reveal">
+      <thead>
+        <tr>
+          <th data-fr="Année" data-en="Year">Année</th>
+          <th data-fr="Projet / Formation" data-en="Project / Formation">Projet / Formation</th>
+          <th data-fr="Description" data-en="Description">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2025 — …</td>
+          <td data-fr="Bachelor SCITI" data-en="Bachelor SCITI">Bachelor SCITI</td>
+          <td data-fr="Digitalisation & Data — Sèmè City Institute of Technology and Innovation" data-en="Digitalisation & Data — Sèmè City Institute of Technology and Innovation">Digitalisation & Data — Sèmè City Institute of Technology and Innovation</td>
+        </tr>
+        <tr>
+          <td>2025 — …</td>
+          <td data-fr="Data Analyst (académique)" data-en="Data Analyst (academic)">Data Analyst (académique)</td>
+          <td data-fr="Analyse, nettoyage et visualisation de données avec R et SQL" data-en="Data analysis, cleaning and visualization with R and SQL">Analyse, nettoyage et visualisation de données avec R et SQL</td>
+        </tr>
+        <tr>
+          <td>2025</td>
+          <td data-fr="Baccalauréat Série C" data-en="Scientific Baccalaureate">Baccalauréat Série C</td>
+          <td data-fr="Mention Très Bien — Sciences" data-en="High Honors — Science">Mention Très Bien — Sciences</td>
+        </tr>
+        <tr>
+          <td>2024 — …</td>
+          <td>Restafy</td>
+          <td data-fr="Venture FoodTech — digitalisation de la restauration en Afrique de l'Ouest" data-en="FoodTech Venture — restaurant digitalisation in West Africa">Venture FoodTech — digitalisation de la restauration en Afrique de l'Ouest</td>
+        </tr>
+        <tr>
+          <td>2024 — …</td>
+          <td data-fr="Projets Kaggle" data-en="Kaggle Projects">Projets Kaggle</td>
+          <td data-fr="Analyse de datasets publics : exploration, modélisation, visualisation" data-en="Public dataset analysis: exploration, modeling, visualization">Analyse de datasets publics : exploration, modélisation, visualisation</td>
+        </tr>
+        <tr>
+          <td>2023</td>
+          <td data-fr="Formation E-commerce" data-en="E-commerce Training">Formation E-commerce</td>
+          <td data-fr="E-commerce & Dropshipping — stratégies de vente digitale" data-en="E-commerce & Dropshipping — digital sales strategies">E-commerce & Dropshipping — stratégies de vente digitale</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- =====================
+     7. VISION
+===================== -->
+<section id="vision">
+  <div class="container">
+    <p class="vision-eyebrow reveal" data-fr="Perspective · Vision" data-en="Perspective · Vision">Perspective · Vision</p>
+    <h2 class="vision-heading reveal" style="transition-delay:0.1s">
+      <span data-fr="Construire une" data-en="Building an">Construire une</span><br>
+      <em data-fr="infrastructure IA" data-en="AI infrastructure">infrastructure IA</em><br>
+      <span data-fr="pour les marchés émergents." data-en="for emerging markets.">pour les marchés émergents.</span>
+    </h2>
+    <p class="vision-body reveal" style="transition-delay:0.2s" data-fr="L'Afrique ne manque pas de données. Elle manque de systèmes pour les transformer en décisions. Je veux construire ces systèmes — à la croisée de la data science, de l'intelligence artificielle et de l'entrepreneuriat technologique." data-en="Africa doesn't lack data. It lacks systems to transform it into decisions. I want to build those systems — at the intersection of data science, artificial intelligence, and technology entrepreneurship.">
+      L'Afrique ne manque pas de données. Elle manque de systèmes pour les transformer en décisions. Je veux construire ces systèmes — à la croisée de la data science, de l'intelligence artificielle et de l'entrepreneuriat technologique.
+    </p>
+    <div class="vision-dots reveal" style="transition-delay:0.3s" aria-hidden="true">
+      <div class="vision-dot active"></div>
+      <div class="vision-dot"></div>
+      <div class="vision-dot"></div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     8. CONTACT
+===================== -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="section-label" data-fr="Contact" data-en="Contact">Contact</div>
+        <h2 class="contact-heading">
+          <span data-fr="Construisons" data-en="Let's build">Construisons</span><br>
+          <em data-fr="quelque chose." data-en="something.">quelque chose.</em>
+        </h2>
+        <p class="contact-sub" data-fr="Ouverte aux opportunités de recherche, collaborations tech, projets data et conversations autour de l'IA en Afrique." data-en="Open to research opportunities, tech collaborations, data projects, and conversations around AI in Africa.">
+          Ouverte aux opportunités de recherche, collaborations tech, projets data et conversations autour de l'IA en Afrique.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:bagoudou046@gmail.com" class="contact-link">
+            <span class="contact-link-label">Email</span>
+            <span class="contact-link-value">bagoudou046@gmail.com</span>
+          </a>
+          <a href="tel:+22901935272 56" class="contact-link">
+            <span class="contact-link-label" data-fr="Téléphone" data-en="Phone">Téléphone</span>
+            <span class="contact-link-value">+229 01 93 52 72 56</span>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <span class="contact-link-label">LinkedIn</span>
+            <span class="contact-link-value">Souraka HAMIDA</span>
+          </a>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <span class="contact-link-label">GitHub</span>
+            <span class="contact-link-value">@souraka-hamida</span>
+          </a>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:0.2s">
+        <blockquote class="contact-quote">
+          <span data-fr='"Le meilleur moment pour construire une infrastructure IA pour l'Afrique était il y a 10 ans. Le deuxième meilleur moment est maintenant."' data-en='"The best time to build an AI infrastructure for Africa was 10 years ago. The second best time is now."'>
+            "Le meilleur moment pour construire une infrastructure IA pour l'Afrique était il y a 10 ans. Le deuxième meilleur moment est maintenant."
+          </span>
+          <cite data-fr="— Souraka HAMIDA, Vision 2025" data-en="— Souraka HAMIDA, Vision 2025">— Souraka HAMIDA, Vision 2025</cite>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© 2025 <span>Souraka HAMIDA</span> · <span data-fr="Tous droits réservés." data-en="All rights reserved.">Tous droits réservés.</span></span>
+  <span class="footer-copy" data-fr="Cotonou, Bénin · Afrique de l'Ouest" data-en="Cotonou, Benin · West Africa">Cotonou, Bénin · Afrique de l'Ouest</span>
+</footer>
+
+<script>
+  // =============================
+  // SOURCE PROTECTION
+  // =============================
+  (function() {
+    // Disable right-click
+    document.addEventListener('contextmenu', e => e.preventDefault());
+
+    // Disable keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+      const banned = [
+        (e.ctrlKey && e.key === 'u'),
+        (e.ctrlKey && e.key === 's'),
+        (e.key === 'F12'),
+        (e.ctrlKey && e.shiftKey && ['i','I','j','J','c','C'].includes(e.key)),
+      ];
+      if (banned.some(Boolean)) { e.preventDefault(); e.stopPropagation(); return false; }
+    });
+
+    // DevTools detection — window size differential
+    let devOpen = false;
+    const threshold = 160;
+    function detectDevTools() {
+      const widthDiff  = window.outerWidth  - window.innerWidth;
+      const heightDiff = window.outerHeight - window.innerHeight;
+      if ((widthDiff > threshold || heightDiff > threshold) && !devOpen) {
+        devOpen = true;
+        document.body.innerHTML = '';
+        document.body.style.background = '#0d0c09';
+      }
+    }
+    setInterval(detectDevTools, 1000);
+  })();
+
+  // =============================
+  // LOADER
+  // =============================
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('hidden');
+    }, 2200);
+  });
+
+  // =============================
+  // CUSTOM CURSOR
+  // =============================
+  const cursor    = document.getElementById('cursor');
+  const cursorDot = document.getElementById('cursor-dot');
+  let cx = 0, cy = 0;
+  let tx = 0, ty = 0;
+
+  document.addEventListener('mousemove', e => {
+    tx = e.clientX; ty = e.clientY;
+    cursorDot.style.left = tx + 'px';
+    cursorDot.style.top  = ty + 'px';
+  });
+
+  (function animateCursor() {
+    cx += (tx - cx) * 0.14;
+    cy += (ty - cy) * 0.14;
+    cursor.style.left = cx + 'px';
+    cursor.style.top  = cy + 'px';
+    requestAnimationFrame(animateCursor);
+  })();
+
+  // =============================
+  // PROGRESS BAR
+  // =============================
+  const progressBar = document.getElementById('progress-bar');
+  document.addEventListener('scroll', () => {
+    const scrollTop    = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    progressBar.style.width = ((scrollTop / scrollHeight) * 100) + '%';
+  });
+
+  // =============================
+  // NAVBAR SCROLL
+  // =============================
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // =============================
+  // SCROLL REVEAL
+  // =============================
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // =============================
+  // ACCORDION
+  // =============================
+  document.querySelectorAll('.accordion-trigger').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const item = this.closest('.accordion-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
+      document.querySelectorAll('.accordion-trigger').forEach(b => b.setAttribute('aria-expanded','false'));
+      if (!isOpen) {
+        item.classList.add('open');
+        this.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // =============================
+  // BILINGUAL TOGGLE
+  // =============================
+  let currentLang = 'fr';
+  const langBtn = document.getElementById('lang-btn');
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-fr], [data-en]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (text) {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = text;
+        } else {
+          el.innerHTML = text;
+        }
+      }
+    });
+    langBtn.textContent = lang === 'fr' ? 'EN' : 'FR';
+    document.documentElement.lang = lang;
+  }
+
+  langBtn.addEventListener('click', function() {
+    currentLang = currentLang === 'fr' ? 'en' : 'fr';
+    applyLang(currentLang);
+  });
+
+  // =============================
+  // MOBILE HAMBURGER
+  // =============================
+  const hamburger  = document.getElementById('hamburger');
+  const mobileNav  = document.getElementById('mobile-nav');
+  let navOpen = false;
+
+  hamburger.addEventListener('click', () => {
+    navOpen = !navOpen;
+    hamburger.setAttribute('aria-expanded', navOpen.toString());
+    mobileNav.classList.toggle('open', navOpen);
+    const spans = hamburger.querySelectorAll('span');
+    if (navOpen) {
+      spans[0].style.transform = 'translateY(6px) rotate(45deg)';
+      spans[1].style.opacity   = '0';
+      spans[2].style.transform = 'translateY(-6px) rotate(-45deg)';
+    } else {
+      spans[0].style.transform = '';
+      spans[1].style.opacity   = '1';
+      spans[2].style.transform = '';
+    }
+  });
+
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navOpen = false;
+      mobileNav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      const spans = hamburger.querySelectorAll('span');
+      spans[0].style.transform = '';
+      spans[1].style.opacity   = '1';
+      spans[2].style.transform = '';
+    });
+  });
+</script>
+
+</body>
+</html>
